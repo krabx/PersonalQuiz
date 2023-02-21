@@ -7,17 +7,12 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+final class ResultViewController: UIViewController {
     
     @IBOutlet var animalLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     
     var results: [Answer] = []
-    
-    // 1. Избавиться от кнопки возврата назад на экране результатов +
-    // 2. Передать массив с ответами на экран с результатами +
-    // 3. Определить наиболее часто встречающийся тип животного +
-    // 4. Отобразить результаты в соответствии с этим животным +
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +20,6 @@ class ResultViewController: UIViewController {
         navigationItem.hidesBackButton = true
         
         animalLabel.text = "Вы - \(animalDefinition().rawValue)"
-        
         descriptionLabel.text = animalDefinition().definition
     }
     
@@ -38,19 +32,19 @@ class ResultViewController: UIViewController {
     }
     
     private func animalDefinition() -> Animal {
-        var dicts: [Animal: Int] = [:]
+        var countOfAnimals: [Animal: Int] = [:]
         
         for result in results {
             let animal = result.animal
-            if dicts.index(forKey: animal) == nil {
-                dicts[animal] = 1
+            if countOfAnimals.index(forKey: animal) == nil {
+                countOfAnimals[animal] = 1
             } else {
-                dicts[animal]! += 1
+                countOfAnimals[animal]! += 1
             }
         }
         
-        let newDicts = dicts.sorted { $0.1 > $1.1 }
+        let sortCountOfAnimals = countOfAnimals.sorted { $0.1 > $1.1 }
         
-        return newDicts.first!.key
+        return sortCountOfAnimals.first!.key
     }
 }
