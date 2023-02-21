@@ -13,7 +13,7 @@ final class ResultViewController: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
     
     var results: [Answer] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,8 +30,11 @@ final class ResultViewController: UIViewController {
     deinit {
         print("\(type(of: self)) has been deallocated")
     }
-    
-    private func animalDefinition() -> Animal {
+}
+
+// MARK: - Private Methods
+private extension ResultViewController {
+    func animalDefinition() -> Animal {
         var countOfAnimals: [Animal: Int] = [:]
         
         for result in results {
